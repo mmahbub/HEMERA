@@ -1,1 +1,2 @@
-This repository contains codes for the paper `HEMERA: A Human-Explainable Transformer Model for Estimating Lung Cancer Risk using GWAS Data`
+This repository contains codes for the paper `HEMERA: A Human-Explainable Transformer Model for Estimating Lung Cancer Risk using GWAS Data`.
+This codebase builds upon and substantially extends the transformer-based architecture originally proposed by Elmes, Kieran, et al. "SNVformer: An Attention-based Deep Neural Network for GWAS Data." bioRxiv (2022): 2022-07, which was developed for single-nucleotide variant (SNV) analysis in gout risk prediction.
