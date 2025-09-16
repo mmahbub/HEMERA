@@ -1,0 +1,1 @@
+../plink1.9_linux_x86_64_20220402/plink --bfile <PATH-TO-RAW-GENOTYPED-DATA> --maf 0.01  --make-bed  --out ../data/data_maf01
