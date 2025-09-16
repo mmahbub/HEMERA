@@ -72,15 +72,12 @@ class Encoder(nn.Module):
         self.device = device
         self.num_heads = num_heads
         self.pos_size = embed_dim - vocab_size
-        self.embed_dim = embed_dim
         self.use_phenos = params['use_phenos']
         if self.pos_size % 2 == 1:
             self.pos_size = self.pos_size - 1
-        one_hot_embed_size = embed_dim#embed_dim - self.pos_size
-        self.one_hot_embed_size = one_hot_embed_size
-        print("encoder 1-hot embedding size: {}".format(one_hot_embed_size))
-        self.embedding = nn.Embedding(vocab_size, embedding_dim=one_hot_embed_size).to('cuda:0')
-        self.pos_encoding = PositionalEncoding(d_model=one_hot_embed_size, max_len=max_seq_pos + 1) ## with position info
+        print("encoder 1-hot embedding size: {}".format(embed_dim))
+        self.embedding = nn.Embedding(vocab_size, embedding_dim=embed_dim).to('cuda:0')
+        self.pos_encoding = PositionalEncoding(d_model=embed_dim, max_len=max_seq_pos + 1) ## with position info
         self.num_layers = params['num_layers']
         
         if self.num_layers>0:
@@ -114,9 +111,9 @@ class TransformerModel(nn.Module):
         super().__init__()
         self.encoder = encoder
         if torch.cuda.device_count()>1:
-            embed_dim = self.encoder.module.one_hot_embed_size
+            embed_dim = self.encoder.module.embed_dim
         else:
-            embed_dim = self.encoder.one_hot_embed_size
+            embed_dim = self.encoder.embed_dim
         
         output_type = params['output_type']
         num_phenos  = params['num_phenos']
